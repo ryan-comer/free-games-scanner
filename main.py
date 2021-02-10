@@ -2,8 +2,9 @@ import feedparser
 import socket
 from multiprocessing import Process, Manager
 
-socket.setdefaulttimeout(5)
+socket.setdefaulttimeout(5) # Default timeout for accessing feeds
 
+# List of rss feeds to scan
 rss_feeds = [
     "https://news.xbox.com/en-us/feed/",
     "https://www.reddit.com/r/gamers/.rss",
@@ -16,6 +17,7 @@ rss_feeds = [
     "https://www.pcgamer.com/rss/"
 ]
 
+# Thread worker function for scanning a feed
 def worker(rss_feed, thread_id, thread_results):
     feed = feedparser.parse(rss_feed)
     for entry in feed.entries:
@@ -23,6 +25,7 @@ def worker(rss_feed, thread_id, thread_results):
             thread_results[thread_id].append((entry.title, entry.link))
     print("%s: DONE" % rss_feeds[thread_id])
 
+# Scan all the feeds and add the results to a list
 def getFreeGames():
     rss_threads = []
     thread_id = 0
