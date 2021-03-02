@@ -52,5 +52,7 @@ def getFreeGames():
     return free_game_articles
 
 if __name__ == "__main__":
-    for game in getFreeGames():
-       print("%s\t%s" % (game[0], game[1]))
+    games = getFreeGames()
+    print("\nGAMES:")
+    for game in games:
+        print("%s\t%s" % (game[0], game[1]))
